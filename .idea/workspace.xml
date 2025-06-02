@@ -16,7 +16,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51aadbda-259a-4245-a376-3bf579183bd0" name="Changes" comment="some" />
+    <list default="true" id="51aadbda-259a-4245-a376-3bf579183bd0" name="Changes" comment="Initial commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -279,6 +279,7 @@
         <item itemvalue="Compose Preview.ComposeBackgroundPrev" />
         <item itemvalue="Compose Preview.ComposeBackgroundPrev" />
         <item itemvalue="Compose Preview.ComposeBackgroundPrev" />
+        <item itemvalue="Compose Preview.ComposeBackgroundPrev" />
       </list>
     </recent_temporary>
   </component>
@@ -310,10 +311,34 @@
     <option name="localTasksCounter" value="3" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="final" />
     <MESSAGE value="some" />
-    <option name="LAST_COMMIT_MESSAGE" value="some" />
+    <MESSAGE value="Initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
