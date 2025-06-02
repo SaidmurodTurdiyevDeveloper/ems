@@ -408,38 +408,38 @@ public final class DaggerEmsApp_HiltComponents_SingletonC {
     private static final class LazyClassKeyProvider {
       static String uzb_smt_presenter_screens_chat_details_ChatDetailsViewModel = "uzb.smt.presenter.screens.chat_details.ChatDetailsViewModel";
 
+      static String uzb_smt_presenter_screens_chat_tab_ChatViewModel = "uzb.smt.presenter.screens.chat_tab.ChatViewModel";
+
+      static String uzb_smt_presenter_screens_lesson_schedule_tab_LessonScheduleViewModel = "uzb.smt.presenter.screens.lesson_schedule_tab.LessonScheduleViewModel";
+
+      static String uzb_smt_presenter_screens_login_LoginViewModel = "uzb.smt.presenter.screens.login.LoginViewModel";
+
+      static String uzb_smt_presenter_screens_home_tab_HomeViewModel = "uzb.smt.presenter.screens.home_tab.HomeViewModel";
+
       static String uzb_smt_presenter_screens_subject_tab_SubjectViewModel = "uzb.smt.presenter.screens.subject_tab.SubjectViewModel";
 
       static String uzb_smt_presenter_screens_usefull_tab_UseFullViewModel = "uzb.smt.presenter.screens.usefull_tab.UseFullViewModel";
 
-      static String uzb_smt_presenter_screens_login_LoginViewModel = "uzb.smt.presenter.screens.login.LoginViewModel";
-
-      static String uzb_smt_presenter_screens_lesson_schedule_tab_LessonScheduleViewModel = "uzb.smt.presenter.screens.lesson_schedule_tab.LessonScheduleViewModel";
-
-      static String uzb_smt_presenter_screens_chat_tab_ChatViewModel = "uzb.smt.presenter.screens.chat_tab.ChatViewModel";
-
-      static String uzb_smt_presenter_screens_home_tab_HomeViewModel = "uzb.smt.presenter.screens.home_tab.HomeViewModel";
-
       @KeepFieldType
       ChatDetailsViewModel uzb_smt_presenter_screens_chat_details_ChatDetailsViewModel2;
+
+      @KeepFieldType
+      ChatViewModel uzb_smt_presenter_screens_chat_tab_ChatViewModel2;
+
+      @KeepFieldType
+      LessonScheduleViewModel uzb_smt_presenter_screens_lesson_schedule_tab_LessonScheduleViewModel2;
+
+      @KeepFieldType
+      LoginViewModel uzb_smt_presenter_screens_login_LoginViewModel2;
+
+      @KeepFieldType
+      HomeViewModel uzb_smt_presenter_screens_home_tab_HomeViewModel2;
 
       @KeepFieldType
       SubjectViewModel uzb_smt_presenter_screens_subject_tab_SubjectViewModel2;
 
       @KeepFieldType
       UseFullViewModel uzb_smt_presenter_screens_usefull_tab_UseFullViewModel2;
-
-      @KeepFieldType
-      LoginViewModel uzb_smt_presenter_screens_login_LoginViewModel2;
-
-      @KeepFieldType
-      LessonScheduleViewModel uzb_smt_presenter_screens_lesson_schedule_tab_LessonScheduleViewModel2;
-
-      @KeepFieldType
-      ChatViewModel uzb_smt_presenter_screens_chat_tab_ChatViewModel2;
-
-      @KeepFieldType
-      HomeViewModel uzb_smt_presenter_screens_home_tab_HomeViewModel2;
     }
   }
 
@@ -498,28 +498,25 @@ public final class DaggerEmsApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String uzb_smt_presenter_screens_chat_tab_ChatViewModel = "uzb.smt.presenter.screens.chat_tab.ChatViewModel";
-
       static String uzb_smt_presenter_screens_lesson_schedule_tab_LessonScheduleViewModel = "uzb.smt.presenter.screens.lesson_schedule_tab.LessonScheduleViewModel";
 
-      static String uzb_smt_presenter_screens_usefull_tab_UseFullViewModel = "uzb.smt.presenter.screens.usefull_tab.UseFullViewModel";
+      static String uzb_smt_presenter_screens_subject_tab_SubjectViewModel = "uzb.smt.presenter.screens.subject_tab.SubjectViewModel";
 
       static String uzb_smt_presenter_screens_chat_details_ChatDetailsViewModel = "uzb.smt.presenter.screens.chat_details.ChatDetailsViewModel";
 
       static String uzb_smt_presenter_screens_home_tab_HomeViewModel = "uzb.smt.presenter.screens.home_tab.HomeViewModel";
 
+      static String uzb_smt_presenter_screens_usefull_tab_UseFullViewModel = "uzb.smt.presenter.screens.usefull_tab.UseFullViewModel";
+
       static String uzb_smt_presenter_screens_login_LoginViewModel = "uzb.smt.presenter.screens.login.LoginViewModel";
 
-      static String uzb_smt_presenter_screens_subject_tab_SubjectViewModel = "uzb.smt.presenter.screens.subject_tab.SubjectViewModel";
-
-      @KeepFieldType
-      ChatViewModel uzb_smt_presenter_screens_chat_tab_ChatViewModel2;
+      static String uzb_smt_presenter_screens_chat_tab_ChatViewModel = "uzb.smt.presenter.screens.chat_tab.ChatViewModel";
 
       @KeepFieldType
       LessonScheduleViewModel uzb_smt_presenter_screens_lesson_schedule_tab_LessonScheduleViewModel2;
 
       @KeepFieldType
-      UseFullViewModel uzb_smt_presenter_screens_usefull_tab_UseFullViewModel2;
+      SubjectViewModel uzb_smt_presenter_screens_subject_tab_SubjectViewModel2;
 
       @KeepFieldType
       ChatDetailsViewModel uzb_smt_presenter_screens_chat_details_ChatDetailsViewModel2;
@@ -528,10 +525,13 @@ public final class DaggerEmsApp_HiltComponents_SingletonC {
       HomeViewModel uzb_smt_presenter_screens_home_tab_HomeViewModel2;
 
       @KeepFieldType
+      UseFullViewModel uzb_smt_presenter_screens_usefull_tab_UseFullViewModel2;
+
+      @KeepFieldType
       LoginViewModel uzb_smt_presenter_screens_login_LoginViewModel2;
 
       @KeepFieldType
-      SubjectViewModel uzb_smt_presenter_screens_subject_tab_SubjectViewModel2;
+      ChatViewModel uzb_smt_presenter_screens_chat_tab_ChatViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -683,7 +683,7 @@ public final class DaggerEmsApp_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectEmsApp(EmsApp emsApp) {
+    public void injectEmsApp(EmsApp arg0) {
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {

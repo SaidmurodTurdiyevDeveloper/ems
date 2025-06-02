@@ -2,6 +2,27 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EMS.iml" filepath="$PROJECT_DIR$/.idea/modules/EMS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EMS.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EMS.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EMS.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EMS.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EMS.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EMS.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EMS.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EMS.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/EMS.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/EMS.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/EMS.common.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/EMS.common.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/EMS.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/EMS.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/EMS.common.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/common/EMS.common.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/EMS.data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/EMS.data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/EMS.data.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/EMS.data.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/EMS.data.main.iml" filepath="$PROJECT_DIR$/.idea/modules/data/EMS.data.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/EMS.data.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/EMS.data.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domen/EMS.domen.iml" filepath="$PROJECT_DIR$/.idea/modules/domen/EMS.domen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domen/EMS.domen.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/domen/EMS.domen.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domen/EMS.domen.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domen/EMS.domen.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domen/EMS.domen.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/domen/EMS.domen.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.iml" filepath="$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/presenter/EMS.presenter.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ems.iml" filepath="$PROJECT_DIR$/.idea/ems.iml" />
     </modules>
   </component>
