@@ -245,7 +245,7 @@ private fun Background(
                 if (it % 2 != 0) {
                     CustomHorizontalDivider()
                 } else {
-                    HorizontalDivider(color = Color(0xFF3A405A))
+                    HorizontalDivider(color = Color(0x333A405A))
                 }
             }
         }
@@ -257,7 +257,7 @@ private fun Background(
             horizontalArrangement = Arrangement.spacedBy(215.dp)
         ) {
             repeat(7) {
-                VerticalDivider(color = Color(0xFF3A405A))
+                VerticalDivider(color = Color(0x333A405A))
             }
         }
     }
@@ -276,7 +276,7 @@ private fun CustomHorizontalDivider(modifier: Modifier = Modifier) {
         var startX = 0f
         while (startX < size.width) {
             drawLine(
-                color = Color(0xFF3A405A), start = Offset(startX, 0f), end = Offset(startX + dashWidth, 0f), strokeWidth = size.height
+                color = Color(0x333A405A), start = Offset(startX, 0f), end = Offset(startX + dashWidth, 0f), strokeWidth = size.height
             )
             startX += dashWidth + dashGap
         }
@@ -298,7 +298,8 @@ internal fun LessonScheduleItemColor(
             .width(204.dp),
         colors = CardDefaults.cardColors(
             containerColor = if (isNow) Color(0xFFC7FFDC) else Color(0xFFEAF4FF)
-        ), elevation = CardDefaults.cardElevation(defaultElevation = 8.dp), shape = RoundedCornerShape(20.dp), onClick = {
+        ), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = RoundedCornerShape(20.dp), onClick = {
             onClick(item)
         }) {
         Row(
