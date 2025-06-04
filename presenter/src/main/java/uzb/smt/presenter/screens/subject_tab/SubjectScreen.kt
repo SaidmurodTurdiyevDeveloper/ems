@@ -27,6 +27,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -69,15 +71,11 @@ internal fun SubjectScreen(
     state: SubjectState,
     onAction: (SubjectIntent) -> Unit
 ) {
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     Scaffold(
         contentWindowInsets = WindowInsets(0),
         topBar = {
-            SubjectToolBar(
-                scrollBehavior = scrollBehavior,
-                onAction = onAction
-            )
+            SubjectToolBar()
         }) { innerPadding ->
         ScrollContent(
             modifier = Modifier
@@ -85,8 +83,7 @@ internal fun SubjectScreen(
                 .fillMaxSize()
                 .padding(innerPadding),
             state = state,
-            onAction = onAction,
-            scrollBehavior = scrollBehavior
+            onAction = onAction
         )
 
     }
@@ -96,86 +93,52 @@ internal fun SubjectScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SubjectToolBar(
-    modifier: Modifier = Modifier,
-    onAction: (SubjectIntent) -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior
+    modifier: Modifier = Modifier
 ) {
-    val expandedAppBarHeight = 175.dp
-    val appBarExpanded by remember {
-        derivedStateOf { scrollBehavior.state.collapsedFraction < 0.9f }
-    }
-    val headerTranslation = (expandedAppBarHeight / 2)
-    val scrollState = scrollBehavior.state
 
-    Box(
+
+    Card(
         modifier = modifier
-            .zIndex(0f)
             .fillMaxWidth()
+            .padding(bottom = 8.dp),
+        shape = RoundedCornerShape(
+            bottomStart = 15.dp,
+            bottomEnd = 15.dp
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp
+        ),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
         Row(
             modifier = Modifier
                 .windowInsetsPadding(WindowInsets.statusBars)
-                .padding(start = 16.dp, end = 8.dp, top = 4.dp, bottom = 4.dp),
+                .padding(start = 16.dp, end = 4.dp, top = 12.dp, bottom = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            AnimatedVisibility(
-                visible = !appBarExpanded,
-                enter = fadeIn(animationSpec = tween()),
-                exit = fadeOut(animationSpec = tween())
-            ) {
-                Text(
-                    text = stringResource(commonR.string.subjects),
-                    style = TextStyle(
-                        fontSize = 18.sp,
-                        lineHeight = 20.sp,
-                        color = Color(0xFF000000),
-                        fontWeight = FontWeight.W700,
-                        fontFamily = Montserrat
-                    )
+            Text(
+                text = stringResource(commonR.string.subjects),
+                style = TextStyle(
+                    fontSize = 24.sp,
+                    lineHeight = 24.sp,
+                    color = Color(0xFF2B343E),
+                    fontWeight = FontWeight.W700,
+                    fontFamily = Montserrat
                 )
-            }
+            )
             Spacer(Modifier.weight(1f))
+
             IconButton(
-                modifier = Modifier.size(41.dp), onClick = {}) {
-                Image(
-                    painter = painterResource(R.drawable.ic_news_black), contentDescription = "notification"
-                )
-            }
-            IconButton(
-                modifier = Modifier.size(41.dp), onClick = {}) {
-                Image(
-                    painter = painterResource(R.drawable.ic_moon_black), contentDescription = "day night"
+                modifier = Modifier.size(36.dp),
+                onClick = {}) {
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "notification",
+                    tint = Color(0xFF2B343E)
                 )
             }
         }
-        TopAppBar(
-            modifier = Modifier
-                .windowInsetsPadding(WindowInsets.statusBars)
-                .padding(top = 51.dp, bottom = 8.dp),
-            title = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .graphicsLayer {
-                            translationY = scrollState.collapsedFraction * headerTranslation.toPx()
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.img_subject),
-                        contentDescription = "img subject",
-                        modifier = Modifier
-                            .height(177.dp),
-                        contentScale = ContentScale.FillHeight
-                    )
-                }
-            },
-            expandedHeight = 177.dp,
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
-            windowInsets = WindowInsets(0),
-            scrollBehavior = scrollBehavior
-        )
     }
 }
 
@@ -185,78 +148,17 @@ private fun ScrollContent(
     modifier: Modifier = Modifier,
     state: SubjectState,
     onAction: (SubjectIntent) -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior
 ) {
-    val appBarExpanded by remember {
-        derivedStateOf { scrollBehavior.state.collapsedFraction < 0.9f }
-    }
 
-    val cornerRadius by animateDpAsState(if (appBarExpanded) 16.dp else 0.dp)
-    val height by animateDpAsState(if (appBarExpanded) 52.dp else 0.dp)
 
     LazyVerticalGrid(
         modifier = modifier
-            .drawBehind {
-                val shadowColor = Color.Black.copy(alpha = 0.25f)
-                val paint = Paint().asFrameworkPaint().apply {
-                    color = android.graphics.Color.TRANSPARENT
-                    setShadowLayer(10.dp.toPx(), 0f, (-1).dp.toPx(), shadowColor.toArgb())
-                }
-
-                drawIntoCanvas {
-                    it.nativeCanvas.drawRoundRect(0f, 0f, size.width, size.height / 2, cornerRadius.toPx(), cornerRadius.toPx(), paint)
-                }
-            }
-            .background(
-                color = Color.White,
-                shape = RoundedCornerShape(topStart = cornerRadius, topEnd = cornerRadius)
-            )
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(bottom = 120.dp, start = 8.dp, end = 8.dp),
+        contentPadding = PaddingValues(bottom = 120.dp, start = 8.dp, end = 8.dp, top = 18.dp),
         columns = GridCells.Fixed(2)
     ) {
-        item(
-            key = "header",
-            span = {
-                GridItemSpan(2)
-            }
-        ) {
-            if (height > 0.dp) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(height)
-                        .padding(top = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        modifier = Modifier.padding(start = 22.dp),
-                        text = stringResource(commonR.string.subjects),
-                        style = TextStyle(
-                            fontSize = 24.sp,
-                            lineHeight = 24.sp,
-                            color = Color(0xFF000000),
-                            fontWeight = FontWeight.W700,
-                            fontFamily = Montserrat
-                        )
-                    )
-                    IconButton(
-                        modifier = Modifier.size(36.dp),
-                        onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Default.MoreVert,
-                            contentDescription = "notification",
-                            tint = Color(0xFF2B343E)
-                        )
-                    }
-                }
-            }
-            Spacer(Modifier.height(16.dp))
-        }
         items(
             count = state.favourites.size,
             span = {

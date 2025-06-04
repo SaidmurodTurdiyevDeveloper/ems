@@ -103,7 +103,7 @@ internal fun CalendarScreen(
                 tint = Color(0xFFFFFFFF),
                 modifier = Modifier.size(16.dp)
             )
-            val monthRes = (Calendar.MONTH + 1).getMonthRes()
+            val monthRes = (calendar.get(Calendar.MONTH)+1).getMonthRes()
             val month = stringResource(monthRes)
             Text(
                 text = "${calendar.get(Calendar.DAY_OF_MONTH)}-${month}- ${calendar.get(Calendar.YEAR)}-" + stringResource(uzb.smt.common.R.string.year),

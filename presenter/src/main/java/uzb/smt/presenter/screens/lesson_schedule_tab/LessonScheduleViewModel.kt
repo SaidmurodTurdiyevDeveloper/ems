@@ -5,6 +5,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import uzb.smt.domen.model.WeekLessonData
+import uzb.smt.domen.model.getEmptyLessonScheduleDataList
 import uzb.smt.presenter.navigator.AppNavigatorImpl
 import uzb.smt.presenter.utils.BaseViewModel
 import java.util.Calendar
@@ -46,7 +48,16 @@ internal class LessonScheduleViewModel @Inject constructor(
             LessonScheduleIntent.PreviousDay -> previousDay()
             LessonScheduleIntent.PreviousWeek -> previousWeek()
             is LessonScheduleIntent.SelectDate -> update(state.copy(selectedDay = intent.date))
+            LessonScheduleIntent.CurrentDay -> today()
         }
+    }
+
+    private fun today() {
+        val selectedDay = Calendar.getInstance()
+        loadDayCalendar.set(Calendar.DAY_OF_YEAR, selectedDay.get(Calendar.DAY_OF_YEAR))
+        loadDayCalendar.set(Calendar.YEAR, selectedDay.get(Calendar.YEAR))
+        loadDays()
+        update(state.copy(selectedDay = selectedDay))
     }
 
     private fun nextDay() {
@@ -75,27 +86,22 @@ internal class LessonScheduleViewModel @Inject constructor(
 
     private fun nextWeek() {
         val selectedDay = (state.days.first().clone() as Calendar)
-        selectedDay.add(Calendar.DAY_OF_MONTH, 7)
-        loadWeekCalendar.add(Calendar.DAY_OF_MONTH, 7)
-        loadDays()
         update(state.copy(selectedDay = selectedDay))
     }
 
     private fun previousWeek() {
         val selectedDay = (state.days.first().clone() as Calendar)
-        selectedDay.add(Calendar.DAY_OF_MONTH, -7)
-        loadWeekCalendar.add(Calendar.DAY_OF_MONTH, -7)
-        loadDays()
         update(state.copy(selectedDay = selectedDay))
     }
 
     private fun loadDays() {
-        val ls = if (isDay) {
-            generateMonthListList(loadDayCalendar)
+        if (isDay) {
+            val ls = generateMonthListList(loadDayCalendar)
+            update(state.copy(days = ls))
         } else {
-            generateWeekListList(loadWeekCalendar)
+            val ls = generateWeekListList(loadWeekCalendar)
+            update(state.copy(weeksLesson = ls))
         }
-        update(state.copy(days = ls))
     }
 
     private fun generateMonthListList(centerDate: Calendar): List<Calendar> {
@@ -112,17 +118,62 @@ internal class LessonScheduleViewModel @Inject constructor(
         return newList
     }
 
-    private fun generateWeekListList(centerDate: Calendar): List<Calendar> {
-        val newList = mutableListOf<Calendar>()
+    private fun generateWeekListList(centerDate: Calendar): List<WeekLessonData> {
+        val newList = mutableListOf<WeekLessonData>()
         val startDate = centerDate.clone() as Calendar
         startDate.set(Calendar.DAY_OF_WEEK, 1)
         val endDate = startDate.clone() as Calendar
         endDate.add(Calendar.DAY_OF_WEEK, 7)
 
         while (startDate.before(endDate)) {
-            newList.add(startDate.clone() as Calendar)
+            newList.add(
+                WeekLessonData(
+                    day = (startDate.clone() as Calendar),
+                    lessons = getEmptyLessonScheduleDataList()
+                )
+            )
             startDate.add(Calendar.DAY_OF_WEEK, 1)
         }
         return newList
     }
+
+    private fun getTimes(startTime: String, endTime: String): List<String> {
+        val startTimeLs = startTime.split(":")
+        val endTimeLs = endTime.split(":")
+
+        var startH = startTimeLs.first().toInt()
+        var startM = startTimeLs[1].toInt()
+        val endH = endTimeLs.first().toInt()
+        val endM = endTimeLs[1].toInt()
+
+        val result = mutableListOf<String>()
+
+
+        while (startH <= endH && startM <= endM) {
+            if (startH < 10) {
+                if (startM > 0) {
+                    result.add("0$startH:$startM")
+                    startH + 1
+                    startM = 0
+                } else {
+                    result.add("0$startH:00")
+                    startH
+                    startM = 30
+                }
+            } else {
+                if (startM > 0) {
+                    result.add("$startH:$startM")
+                    startH + 1
+                    startM = 0
+                } else {
+                    result.add("$startH:00")
+                    startH
+                    startM = 30
+                }
+            }
+        }
+
+        return result
+    }
+
 }

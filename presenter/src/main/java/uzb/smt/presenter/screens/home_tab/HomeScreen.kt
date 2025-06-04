@@ -91,7 +91,7 @@ internal fun HomeScreen(
     val isDarkTheme = isSystemInDarkTheme()
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val appBarExpanded by remember {
-        derivedStateOf { scrollBehavior.state.collapsedFraction < 0.9f }
+        derivedStateOf { scrollBehavior.state.collapsedFraction < 0.5f }
     }
     val toolBarColor by animateColorAsState(if (appBarExpanded) MainToolbarBgColor else MainToolbarBgColor2)
     LaunchedEffect(Unit) {
@@ -209,17 +209,27 @@ private fun MainToolBar(
 
     val headerTranslation = (expandedAppBarHeight / 2)
     val scrollState = scrollBehavior.state
+    val appBarExpanded by remember {
+        derivedStateOf { scrollBehavior.state.collapsedFraction >= 0.5f }
+    }
+    val cornerRadius by animateDpAsState(if (appBarExpanded) 16.dp else 0.dp)
 
     Column(
         modifier = modifier
             .zIndex(0f)
             .fillMaxWidth()
-            .background(toolBarColor)
+            .background(
+                toolBarColor,
+                RoundedCornerShape(
+                    bottomStart = cornerRadius,
+                    bottomEnd = cornerRadius
+                )
+            )
     ) {
         Row(
             modifier = Modifier
                 .windowInsetsPadding(WindowInsets.statusBars)
-                .padding(horizontal = 8.dp, vertical = 4.dp), verticalAlignment = Alignment.Top
+                .padding(horizontal = 8.dp, vertical = 8.dp), verticalAlignment = Alignment.Top
         ) {
             Image(
                 modifier = Modifier

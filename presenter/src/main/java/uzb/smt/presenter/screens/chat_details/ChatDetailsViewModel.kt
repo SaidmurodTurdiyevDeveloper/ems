@@ -27,11 +27,11 @@ internal class ChatDetailsViewModel @Inject constructor(
             MessageData(
                 id = "id",
                 text = message,
-                date = "2025-04-30 12:12:12",
+                date = "2025-04-30 12:12",
                 seen = false,
                 isYour = true
             )
         )
-        update(state.copy(messages = newList))
+        update(state.copy(messages = newList, message = ""))
     }
 }

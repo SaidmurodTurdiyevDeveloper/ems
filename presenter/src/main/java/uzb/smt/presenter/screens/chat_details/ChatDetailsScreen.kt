@@ -1,5 +1,8 @@
 package uzb.smt.presenter.screens.chat_details
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
@@ -41,9 +45,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uzb.smt.domen.model.MessageData
+import uzb.smt.domen.model.getMessageData
 import uzb.smt.presenter.R
 import uzb.smt.presenter.theme.Montserrat
 
@@ -130,6 +136,8 @@ internal fun ChatDetailsScreen(
                 ),
                 shape = RoundedCornerShape(26.dp)
             ) {
+
+
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxSize(),
@@ -164,27 +172,54 @@ internal fun ChatDetailsScreen(
                     },
                     trailingIcon = {
                         Row(modifier = Modifier.padding(end = 16.dp)) {
-                            IconButton(
-                                modifier = Modifier.size(30.dp),
-                                onClick = {}
+                            AnimatedVisibility(
+                                visible = state.message.isEmpty(),
+                                enter = fadeIn(),
+                                exit = fadeOut()
                             ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_file),
-                                    contentDescription = "smile",
-                                    tint = Color(0xFF00226B)
-                                )
+                                Row {
+                                    IconButton(
+                                        modifier = Modifier.size(30.dp),
+                                        onClick = {}
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.ic_file),
+                                            contentDescription = "files",
+                                            tint = Color(0xFF00226B)
+                                        )
+                                    }
+                                    Spacer(Modifier.width(7.dp))
+                                    IconButton(
+                                        modifier = Modifier.size(30.dp),
+                                        onClick = {}
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.ic_micraphone),
+                                            contentDescription = "record",
+                                            tint = Color(0xFF00226B)
+                                        )
+                                    }
+                                }
                             }
-                            Spacer(Modifier.width(7.dp))
-                            IconButton(
-                                modifier = Modifier.size(30.dp),
-                                onClick = {}
+                            AnimatedVisibility(
+                                visible = state.message.isNotEmpty(),
+                                enter = fadeIn(),
+                                exit = fadeOut()
                             ) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_micraphone),
-                                    contentDescription = "smile",
-                                    tint = Color(0xFF00226B)
-                                )
+                                IconButton(
+                                    modifier = Modifier.size(30.dp),
+                                    onClick = {
+                                        onAction(ChatDetailsIntent.SendMessage)
+                                    }
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_send),
+                                        contentDescription = "ic_send",
+                                        tint = Color(0xFF3E7BFF)
+                                    )
+                                }
                             }
+
                         }
                     },
                     placeholder = {
@@ -199,7 +234,7 @@ internal fun ChatDetailsScreen(
                             )
                         )
                     },
-                    singleLine = true
+                    singleLine = false
                 )
             }
 
@@ -240,7 +275,10 @@ private fun YourMessage(
                 )
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier.requiredHeightIn(min = 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 if (message.seen) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_seen),
@@ -307,4 +345,24 @@ private fun OtherMessage(
             )
         )
     }
+}
+
+
+@Preview
+@Composable
+private fun YourMessagePrev() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        YourMessage(
+            message = getMessageData(isYour = true)
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun OtherMessagePrev() {
+
+    OtherMessage(
+        message = getMessageData(isYour = false)
+    )
 }

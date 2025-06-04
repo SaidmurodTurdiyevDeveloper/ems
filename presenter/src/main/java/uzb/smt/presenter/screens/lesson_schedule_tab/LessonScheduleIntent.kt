@@ -6,6 +6,7 @@ internal sealed interface LessonScheduleIntent {
     data class SelectDate(val date: Calendar) : LessonScheduleIntent
     data object NextDay : LessonScheduleIntent
     data object PreviousDay : LessonScheduleIntent
+    data object CurrentDay : LessonScheduleIntent
     data object NextWeek : LessonScheduleIntent
     data object PreviousWeek : LessonScheduleIntent
     data object ChangeToDay: LessonScheduleIntent
