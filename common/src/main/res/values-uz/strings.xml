@@ -62,4 +62,25 @@
     <string name="learing">O’zlashtirish</string>
     <string name="bmbba">BMBA rasmiy sahifasi</string>
     <string name="olipiada">Olimpiadalar</string>
+    <string name="connect">Bog’lanish</string>
+    <string name="resurs">Resurslar</string>
+    <string name="rating">Reyting</string>
+    <string name="lesson_absent">Davomat</string>
+    <string name="subject_chat">Fan chati</string>
+    <string name="calculator">Kalkulator</string>
+    <string name="task_descriptions">Tavsif:</string>
+    <string name="scored">Baholangan</string>
+    <string name="finished">Tugadi</string>
+    <string name="days_left">%d kun qoldi</string>
+    <string name="hourss_left">%d soat qoldi</string>
+    <string name="minutes_left">%d minut qoldi</string>
+    <string name="task_upload">Yuklash</string>
+    <string name="difficult_message">Qiyinchiliklar – faqatgina sinov, sen esa undan kuchliroqsan</string>
+    <string name="wlcome">Xush kelibsiz !</string>
+    <string name="until_time">%s gacha</string>
+    <string name="duration">Jarayonda</string>
+    <string name="done">Bajarish</string>
+    <string name="send_message">Xabar yuborish</string>
+    <string name="jadids">Jadidlar</string>
+    <string name="in_detail">Batafsil</string>
 </resources>

@@ -34,7 +34,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import uzb.smt.presenter.navigator.TabScreen
-import uzb.smt.presenter.theme.SelectedTabColor
+import uzb.smt.presenter.theme.DarkPurple
 
 @Composable
 internal fun BottomNavigation(
@@ -141,7 +141,7 @@ private fun RowScope.TabNavigationItem(
             .size(72.dp)
             .clip(CircleShape)
             .background(
-                color = if (selected) SelectedTabColor else Color.Transparent
+                color = if (selected) DarkPurple else Color.Transparent
             )
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },

@@ -35,27 +35,38 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.min
 import androidx.compose.ui.unit.sp
 import uzb.smt.domen.model.CurrentLesson
 import uzb.smt.domen.model.getCurrentLesson
+import uzb.smt.domen.validator.DateUtil
 import uzb.smt.presenter.R
+import uzb.smt.presenter.theme.Gray
+import uzb.smt.presenter.theme.LightBlueThird
+import uzb.smt.presenter.theme.LightGreen
 import uzb.smt.presenter.theme.Montserrat
-import uzb.smt.presenter.utils.calculateTimePercent
+import uzb.smt.presenter.theme.WhiteGreen
 
 @Composable
 internal fun CurrentLessonItem(
-    modifier: Modifier = Modifier, item: CurrentLesson
+    modifier: Modifier = Modifier,
+    item: CurrentLesson
 ) {
     Card(
-        modifier = modifier, shape = RoundedCornerShape(21.dp), colors = CardDefaults.cardColors(containerColor = Color.White)
+        modifier = modifier,
+        shape = RoundedCornerShape(21.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .requiredWidthIn(min = 161.dp)
+                .height(161.dp)
         ) {
             Image(
-                modifier = Modifier.fillMaxSize(), painter = painterResource(R.drawable.img_bg_subject_item), contentDescription = "img subject", contentScale = ContentScale.Crop
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(R.drawable.img_bg_subject_item),
+                contentDescription = "img subject",
+                contentScale = ContentScale.Crop
             )
             Box(
                 modifier = Modifier
@@ -63,7 +74,8 @@ internal fun CurrentLessonItem(
                     .background(
                         brush = Brush.linearGradient(
                             colors = listOf(
-                                Color(0x991495FF), Color(0x80000000)
+                                LightBlueThird.copy(0.6f),
+                                Color.Black.copy(0.5f)
                             )
                         )
                     )
@@ -71,84 +83,134 @@ internal fun CurrentLessonItem(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 15.dp, start = 14.dp, end = 14.dp)
+                    .padding(
+                        top = 15.dp,
+                        start = 14.dp,
+                        end = 14.dp
+                    )
             ) {
                 Text(
-                    modifier = Modifier.weight(1f), text = item.name, style = TextStyle(
-                        fontSize = 20.sp, lineHeight = 22.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W600, fontFamily = Montserrat
+                    modifier = Modifier.weight(1f),
+                    text = item.name,
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        lineHeight = 22.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.W600,
+                        fontFamily = Montserrat
                     )
                 )
                 Text(
                     modifier = Modifier
-                        .background(color = Color(0xFF3BD576), shape = androidx.compose.foundation.shape.RoundedCornerShape(14.dp))
-                        .padding(horizontal = 15.dp, vertical = 1.dp),
+                        .background(
+                            color = LightGreen,
+                            shape = RoundedCornerShape(14.dp)
+                        )
+                        .padding(
+                            horizontal = 15.dp,
+                            vertical = 1.dp
+                        ),
                     text = stringResource(uzb.smt.common.R.string.now),
                     style = TextStyle(
-                        fontSize = 12.sp, lineHeight = 14.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W600, fontFamily = Montserrat
+                        fontSize = 12.sp,
+                        lineHeight = 14.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.W600,
+                        fontFamily = Montserrat
                     )
                 )
             }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .align(Alignment.BottomCenter), verticalArrangement = Arrangement.spacedBy(8.dp)
+                    .align(Alignment.BottomCenter),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
 
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 14.dp, end = 14.dp), horizontalArrangement = Arrangement.SpaceBetween
+                        .padding(start = 14.dp, end = 14.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        modifier = Modifier.weight(1f), text = item.teacher, style = TextStyle(
-                            fontSize = 12.sp, lineHeight = 14.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W600, fontFamily = Montserrat
+                        modifier = Modifier.weight(1f),
+                        text = item.teacher,
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            lineHeight = 14.sp,
+                            color = Color.White,
+                            fontWeight = FontWeight.W600,
+                            fontFamily = Montserrat
                         )
                     )
                     Text(
-                        text = stringResource(uzb.smt.common.R.string.room, item.room), style = TextStyle(
-                            fontSize = 12.sp, lineHeight = 14.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W600, fontFamily = Montserrat
+                        text = stringResource(uzb.smt.common.R.string.room, item.room),
+                        style = TextStyle(
+                            fontSize = 12.sp,
+                            lineHeight = 14.sp,
+                            color = Color.White,
+                            fontWeight = FontWeight.W600,
+                            fontFamily = Montserrat
                         )
                     )
                 }
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 8.dp, bottom = 12.dp, end = 8.dp), verticalAlignment = Alignment.Bottom
+                        .padding(start = 8.dp, bottom = 12.dp, end = 8.dp),
+                    verticalAlignment = Alignment.Bottom
                 ) {
                     Box(
                         modifier = Modifier
                             .requiredWidthIn(min = 210.dp)
                             .requiredHeightIn(min = 51.dp)
-                            .clip(androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
+                            .clip(RoundedCornerShape(8.dp))
                     ) {
                         Box(
                             modifier = Modifier
                                 .matchParentSize()
-                                .blur(20.dp)
+                                .blur(28.dp)
                                 .background(Color.White.copy(alpha = 0.3f))
                         )
                         Column(
                             modifier = Modifier
                                 .matchParentSize()
-                                .padding(vertical = 7.5.dp, horizontal = 13.dp), verticalArrangement = Arrangement.spacedBy(8.dp)
+                                .padding(vertical = 7.5.dp, horizontal = 13.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    modifier = Modifier, text = item.startTime, maxLines = 1, style = TextStyle(
-                                        fontSize = 16.sp, lineHeight = 18.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W500, fontFamily = Montserrat
+                                    text = item.startTime,
+                                    maxLines = 1,
+                                    style = TextStyle(
+                                        fontSize = 16.sp,
+                                        lineHeight = 18.sp,
+                                        color = Color.White,
+                                        fontWeight = FontWeight.W500,
+                                        fontFamily = Montserrat
                                     )
                                 )
                                 Spacer(Modifier.weight(5f))
                                 repeat(16) {
                                     Icon(
-                                        modifier = Modifier.size(4.dp), painter = painterResource(R.drawable.ic_dot), contentDescription = "dot", tint = Color(0xFFD9D9D9)
+                                        modifier = Modifier.size(4.dp),
+                                        painter = painterResource(R.drawable.ic_dot),
+                                        contentDescription = "dot",
+                                        tint = Gray
                                     )
                                     Spacer(Modifier.weight(2f))
                                 }
                                 Spacer(Modifier.weight(3f))
                                 Text(
-                                    modifier = Modifier, text = item.endTime, maxLines = 1, style = TextStyle(
-                                        fontSize = 16.sp, lineHeight = 18.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W500, fontFamily = Montserrat
+                                    modifier = Modifier,
+                                    text = item.endTime,
+                                    maxLines = 1, style = TextStyle(
+                                        fontSize = 16.sp,
+                                        lineHeight = 18.sp,
+                                        color = Color.White,
+                                        fontWeight = FontWeight.W500,
+                                        fontFamily = Montserrat
                                     )
                                 )
                             }
@@ -156,18 +218,18 @@ internal fun CurrentLessonItem(
                                 Modifier
                                     .width(184.dp)
                                     .height(8.dp)
-                                    .clip(androidx.compose.foundation.shape.RoundedCornerShape(10.dp))
-                                    .background(Color(0xFFD9D9D9))
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(Gray)
                                     .padding(1.dp)
                             ) {
-                                val percent = calculateTimePercent(item.startTime, item.endTime)
+                                val percent = DateUtil.calculateTimePercent(item.startTime, item.endTime)
                                 Box(
                                     Modifier
                                         .fillMaxWidth(1 - percent)
                                         .height(6.dp)
-                                        .clip(androidx.compose.foundation.shape.RoundedCornerShape(10.dp))
+                                        .clip(RoundedCornerShape(10.dp))
                                         .background(
-                                            brush = Brush.linearGradient(listOf(Color(0xFFE2FFED), Color(0xFF3BD576)))
+                                            brush = Brush.linearGradient(listOf(WhiteGreen, LightGreen))
                                         )
                                 )
                             }
@@ -178,17 +240,17 @@ internal fun CurrentLessonItem(
                         modifier = Modifier
                             .width(142.dp)
                             .height(54.dp)
-                            .clip(androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
+                            .clip(RoundedCornerShape(8.dp))
                     ) {
                         Box(
                             modifier = Modifier
                                 .matchParentSize()
-                                .blur(20.dp)
+                                .blur(28.dp)
                                 .background(Color.White.copy(alpha = 0.3f))
                         )
                         Column(
                             modifier = Modifier
-                                .border(1.dp, Color(0xFFD9D9D9), androidx.compose.foundation.shape.RoundedCornerShape(8.dp))
+                                .border(1.dp, Gray, RoundedCornerShape(8.dp))
                                 .padding(horizontal = 7.dp, vertical = 6.dp),
                         ) {
                             Row(
@@ -196,12 +258,20 @@ internal fun CurrentLessonItem(
                                 verticalAlignment = Alignment.Top
                             ) {
                                 Icon(
-                                    painter = painterResource(R.drawable.ic_send_up), contentDescription = "Calendar", tint = Color(0xFF1495FF), modifier = Modifier.size(16.dp)
+                                    painter = painterResource(R.drawable.ic_send_up),
+                                    contentDescription = "Calendar",
+                                    tint = LightBlueThird,
+                                    modifier = Modifier.size(16.dp)
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = stringResource(uzb.smt.common.R.string.next_lesson, item.nextLesson), style = TextStyle(
-                                        fontSize = 10.sp, lineHeight = 12.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W600, fontFamily = Montserrat
+                                    text = stringResource(uzb.smt.common.R.string.next_lesson, item.nextLesson),
+                                    style = TextStyle(
+                                        fontSize = 10.sp,
+                                        lineHeight = 12.sp,
+                                        color = Color.White,
+                                        fontWeight = FontWeight.W600,
+                                        fontFamily = Montserrat
                                     )
                                 )
                             }
@@ -211,13 +281,23 @@ internal fun CurrentLessonItem(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Text(
-                                    text = item.nextLessonStartTime, style = TextStyle(
-                                        fontSize = 16.sp, lineHeight = 18.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W600, fontFamily = Montserrat
+                                    text = item.nextLessonStartTime,
+                                    style = TextStyle(
+                                        fontSize = 16.sp,
+                                        lineHeight = 18.sp,
+                                        color = Color.White,
+                                        fontWeight = FontWeight.W600,
+                                        fontFamily = Montserrat
                                     )
                                 )
                                 Text(
-                                    text = item.nextLessonEndTime, style = TextStyle(
-                                        fontSize = 16.sp, lineHeight = 18.sp, color = Color(0xFFFFFFFF), fontWeight = FontWeight.W600, fontFamily = Montserrat
+                                    text = item.nextLessonEndTime,
+                                    style = TextStyle(
+                                        fontSize = 16.sp,
+                                        lineHeight = 18.sp,
+                                        color = Color.White,
+                                        fontWeight = FontWeight.W600,
+                                        fontFamily = Montserrat
                                     )
                                 )
                             }

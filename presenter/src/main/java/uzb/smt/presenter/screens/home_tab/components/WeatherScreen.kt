@@ -14,10 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uzb.smt.presenter.R
@@ -32,8 +34,9 @@ internal fun WeatherScreen(
         modifier = modifier
             .height(71.dp)
             .width(72.dp)
+            .alpha(0.97f)
             .background(
-                color = Color(0x9AFFFFFF),
+                color = Color.White.copy(alpha = 0.60f),
                 shape = RoundedCornerShape(14.dp)
             )
             .padding(horizontal = 8.dp, vertical = 5.dp),
@@ -43,7 +46,7 @@ internal fun WeatherScreen(
         Icon(
             painter = painterResource(R.drawable.ic_cloud),
             contentDescription = "Cloud",
-            tint = Color(0xFFFFFFFF),
+            tint = Color.White,
             modifier = Modifier.size(27.dp)
         )
         Box(modifier = Modifier) {
@@ -52,19 +55,20 @@ internal fun WeatherScreen(
                 style = TextStyle(
                     fontSize = 24.sp,
                     lineHeight = 24.sp,
-                    color = Color(0xFFFFFFFF),
+                    color = Color.White,
                     fontWeight = FontWeight.W600,
                     fontFamily = Montserrat
                 )
             )
-//            Icon(
-//                painter = painterResource(R.drawable.ic_degree),
-//                contentDescription = "degree",
-//                modifier = Modifier
-//                    .size(8.5.dp)
-//                    .align(Alignment.TopEnd)
-//                    .offset(y = (-8).dp, x = 16.dp)
-//            )
         }
     }
+}
+
+@Preview
+@Composable
+private fun WeatherScreenPrev() {
+    WeatherScreen(
+        modifier = Modifier,
+        degree = "18"
+    )
 }

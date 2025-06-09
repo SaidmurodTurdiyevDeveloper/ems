@@ -34,7 +34,8 @@ import uzb.smt.presenter.theme.Montserrat
 @Composable
 internal fun SubjectItem(
     modifier: Modifier = Modifier,
-    subjectData: SubjectData
+    subjectData: SubjectData,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -43,7 +44,7 @@ internal fun SubjectItem(
             width = 1.dp,
             color = Color(0xFFD9D9D9)
         ),
-        onClick = {},
+        onClick = onClick,
         colors = CardDefaults.cardColors(containerColor = Color(0xFFEBF1FF))
     ) {
         Column(

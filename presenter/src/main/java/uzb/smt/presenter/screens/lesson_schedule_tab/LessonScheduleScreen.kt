@@ -1,5 +1,8 @@
 package uzb.smt.presenter.screens.lesson_schedule_tab
 
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -25,14 +28,15 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -49,8 +53,19 @@ import uzb.smt.common.R as commonR
 
 
 @Composable
-internal fun LessonScheduleScreen(state: LessonScheduleState, onAction: (LessonScheduleIntent) -> Unit) {
-    val width = (LocalConfiguration.current.screenWidthDp - 16 - (7 * 50)) / 6
+internal fun LessonScheduleScreen(
+    state: LessonScheduleState,
+    onAction: (LessonScheduleIntent) -> Unit
+) {
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        (context as ComponentActivity).enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                scrim = android.graphics.Color.TRANSPARENT,
+                darkScrim = android.graphics.Color.TRANSPARENT
+            )
+        )
+    }
     val buttonsWidth = (LocalConfiguration.current.screenWidthDp - 115) / 3
     val now = remember {
         Calendar.getInstance()
@@ -69,19 +84,6 @@ internal fun LessonScheduleScreen(state: LessonScheduleState, onAction: (LessonS
                     fontSize = 30.sp, lineHeight = 32.sp, color = Color(0xFF000000), fontWeight = FontWeight.W700, fontFamily = Montserrat
                 )
             )
-            Spacer(Modifier.weight(1f))
-            IconButton(
-                modifier = Modifier.size(41.dp), onClick = {}) {
-                Image(
-                    painter = painterResource(R.drawable.ic_news_black), contentDescription = "notification"
-                )
-            }
-            IconButton(
-                modifier = Modifier.size(41.dp), onClick = {}) {
-                Image(
-                    painter = painterResource(R.drawable.ic_moon_black), contentDescription = "day night"
-                )
-            }
         }
         LazyRow(
             modifier = Modifier.fillMaxWidth(),

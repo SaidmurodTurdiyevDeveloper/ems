@@ -29,6 +29,7 @@ internal class ChatDetailsViewModel @Inject constructor(
                 text = message,
                 date = "2025-04-30 12:12",
                 seen = false,
+                ownerImage = "",
                 isYour = true
             )
         )

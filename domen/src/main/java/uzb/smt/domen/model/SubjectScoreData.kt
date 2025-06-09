@@ -3,6 +3,7 @@ package uzb.smt.domen.model
 
 data class SubjectScoreData(
     val id: String,
+    val subjectId: String,
     val percent: Float,
     val lastScoreDate: String,
     val name: String,
@@ -13,7 +14,8 @@ data class SubjectScoreData(
 )
 
 fun getEmptySubjectScoreData(): SubjectScoreData = SubjectScoreData(
-    id = "subject_id",
+    id = "id",
+    subjectId = "subject_id",
     percent = 0.9f,
     lastScoreDate = "2025-04-30 12:12",
     name = "Matematika",
@@ -25,7 +27,8 @@ fun getEmptySubjectScoreData(): SubjectScoreData = SubjectScoreData(
 
 fun getSubjectScoreDataList(): List<SubjectScoreData> = listOf(
     SubjectScoreData(
-        id = "subject_id",
+        id = "id",
+        subjectId = "subject_id",
         percent = 0.9f,
         lastScoreDate = "2025-04-30 12:12",
         name = "Matematika",
@@ -35,7 +38,8 @@ fun getSubjectScoreDataList(): List<SubjectScoreData> = listOf(
         lastScores = listOf(5, 5, 5)
     ),
     SubjectScoreData(
-        id = "subject_id_2",
+        id = "id2",
+        subjectId = "subject_id2",
         percent = 0.7f,
         lastScoreDate = "2025-04-28 12:12",
         name = "Fizika",

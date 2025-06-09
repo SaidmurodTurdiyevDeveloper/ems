@@ -1,5 +1,8 @@
 package uzb.smt.presenter.screens.usefull_tab
 
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,9 +21,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -37,6 +42,15 @@ internal fun UseFullScreen(
     state: UseFullState,
     onAction: (UseFullIntent) -> Unit
 ) {
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        (context as ComponentActivity).enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                scrim = android.graphics.Color.TRANSPARENT,
+                darkScrim = android.graphics.Color.TRANSPARENT
+            )
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()

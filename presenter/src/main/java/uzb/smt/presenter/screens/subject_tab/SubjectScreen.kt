@@ -1,14 +1,10 @@
 package uzb.smt.presenter.screens.subject_tab
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Image
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,34 +30,23 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import uzb.smt.presenter.R
 import uzb.smt.presenter.screens.subject_tab.component.FavouriteSubjectItem
 import uzb.smt.presenter.screens.subject_tab.component.SubjectItem
+import uzb.smt.presenter.theme.DarkBlue
+import uzb.smt.presenter.theme.LightDarkBlue
 import uzb.smt.presenter.theme.Montserrat
 import uzb.smt.common.R as commonR
 
@@ -71,7 +56,15 @@ internal fun SubjectScreen(
     state: SubjectState,
     onAction: (SubjectIntent) -> Unit
 ) {
+    val context = LocalContext.current
 
+    LaunchedEffect(Unit) {
+        (context as ComponentActivity).enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(
+                scrim = android.graphics.Color.TRANSPARENT
+            )
+        )
+    }
     Scaffold(
         contentWindowInsets = WindowInsets(0),
         topBar = {
@@ -96,11 +89,9 @@ private fun SubjectToolBar(
     modifier: Modifier = Modifier
 ) {
 
-
     Card(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp),
+            .fillMaxWidth(),
         shape = RoundedCornerShape(
             bottomStart = 15.dp,
             bottomEnd = 15.dp
@@ -108,10 +99,17 @@ private fun SubjectToolBar(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 8.dp
         ),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent)
     ) {
         Row(
             modifier = Modifier
+                .background(
+                    brush = Brush.linearGradient(listOf(DarkBlue, LightDarkBlue)),
+                    RoundedCornerShape(
+                        bottomStart = 16.dp,
+                        bottomEnd = 16.dp
+                    )
+                )
                 .windowInsetsPadding(WindowInsets.statusBars)
                 .padding(start = 16.dp, end = 4.dp, top = 12.dp, bottom = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -122,7 +120,7 @@ private fun SubjectToolBar(
                 style = TextStyle(
                     fontSize = 24.sp,
                     lineHeight = 24.sp,
-                    color = Color(0xFF2B343E),
+                    color = Color.White,
                     fontWeight = FontWeight.W700,
                     fontFamily = Montserrat
                 )
@@ -135,7 +133,7 @@ private fun SubjectToolBar(
                 Icon(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = "notification",
-                    tint = Color(0xFF2B343E)
+                    tint = Color.White
                 )
             }
         }
@@ -186,7 +184,9 @@ private fun ScrollContent(
                 modifier = Modifier
                     .fillMaxWidth(),
                 subjectData = it
-            )
+            ){
+                onAction(SubjectIntent.OpenSubjectDetails(it.id))
+            }
         }
     }
 }

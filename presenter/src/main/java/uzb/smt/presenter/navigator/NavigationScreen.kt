@@ -17,6 +17,8 @@ import uzb.smt.presenter.screens.chat_details.ChatDetailsScreen
 import uzb.smt.presenter.screens.chat_details.ChatDetailsViewModel
 import uzb.smt.presenter.screens.login.LoginScreen
 import uzb.smt.presenter.screens.login.LoginViewModel
+import uzb.smt.presenter.screens.subject_details.SubjectDetailsScreen
+import uzb.smt.presenter.screens.subject_details.SubjectDetailsViewModel
 import uzb.smt.presenter.screens.tab.MainTabScreen
 import uzb.smt.presenter.theme.EMSTheme
 
@@ -48,12 +50,26 @@ fun NavigationScreen() {
             }
             composable(
                 route = AppScreens.ChatDetails().route, arguments = listOf(
-                navArgument("chatId") {
-                    type = NavType.StringType
-                })) {
+                    navArgument("chatId") {
+                        type = NavType.StringType
+                    })
+            ) {
                 val viewmodel = hiltViewModel<ChatDetailsViewModel>()
                 val state by viewmodel.uiState.collectAsState()
                 ChatDetailsScreen(
+                    state = state, onAction = viewmodel::onAction
+                )
+            }
+            composable(
+                route = AppScreens.SubjectDetails().route,
+                arguments = listOf(
+                    navArgument("subjectId") {
+                        type = NavType.StringType
+                    })
+            ) {
+                val viewmodel = hiltViewModel<SubjectDetailsViewModel>()
+                val state by viewmodel.uiState.collectAsState()
+                SubjectDetailsScreen(
                     state = state, onAction = viewmodel::onAction
                 )
             }

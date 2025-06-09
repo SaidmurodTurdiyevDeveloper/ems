@@ -19,7 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uzb.smt.common.utils.getWeekDayRes
+import uzb.smt.presenter.theme.Blue
+import uzb.smt.presenter.theme.GrayThird
 import uzb.smt.presenter.theme.Montserrat
+import uzb.smt.presenter.theme.Purple
 import java.util.Calendar
 
 @Composable
@@ -38,11 +41,11 @@ internal fun DayItem(
         modifier = modifier,
         border = BorderStroke(
             width = 1.dp,
-            color = if (isSelected) Color.Transparent else Color(0xFFBCBCBC)
+            color = if (isSelected) Color.Transparent else GrayThird
         ),
         shape = RoundedCornerShape(15.dp),
         onClick = onClick,
-        colors = CardDefaults.cardColors(containerColor = if (isSelected) Color(0xFF0077FF) else Color.White)
+        colors = CardDefaults.cardColors(containerColor = if (isSelected) Blue else Color.White)
     ) {
         Column(
             modifier = Modifier
@@ -56,7 +59,7 @@ internal fun DayItem(
                 style = TextStyle(
                     fontSize = 24.sp,
                     lineHeight = 24.sp,
-                    color = if (isSelected) Color(0xFFFFFFFF) else Color(0xFF3A405A),
+                    color = if (isSelected) Color.White else Purple,
                     fontWeight = FontWeight.W600,
                     fontFamily = Montserrat
                 )
@@ -66,7 +69,7 @@ internal fun DayItem(
                 style = TextStyle(
                     fontSize = 10.sp,
                     lineHeight = 12.sp,
-                    color = if (isSelected) Color(0xFFFFFFFF) else Color(0xFF3A405A),
+                    color = if (isSelected) Color.White else Purple.copy(0.6f),
                     fontWeight = FontWeight.W500,
                     fontFamily = Montserrat
                 )

@@ -32,4 +32,10 @@ internal abstract class BaseViewModel<State, Intent>(initializeData: State, priv
             appNavigator.navigate(screen)
         }
     }
+
+    protected fun navigateWithoutBack(screen: Screen,currentScreen: Screen) {
+        viewModelScope.launch {
+            appNavigator.navigateWithOutBack(screen,currentScreen)
+        }
+    }
 }

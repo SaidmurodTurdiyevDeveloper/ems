@@ -6,6 +6,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import uzb.smt.domen.validator.loginValidator
+import uzb.smt.domen.validator.passwordValidator
 import uzb.smt.presenter.navigator.AppNavigatorImpl
 import uzb.smt.presenter.navigator.AppScreens
 import uzb.smt.presenter.utils.BaseViewModel
@@ -33,7 +35,7 @@ internal class LoginViewModel @Inject constructor(
             is LoginIntent.ChangeLogin -> update(
                 state.copy(
                     login = intent.login,
-                    isActive = intent.login.isNotBlank() || state.password.isNotBlank(),
+                    isActive = intent.login.isNotBlank() && state.password.isNotBlank(),
                     loginError = null
                 )
             )
@@ -41,23 +43,33 @@ internal class LoginViewModel @Inject constructor(
             is LoginIntent.ChangePassword -> update(
                 state.copy(
                     password = intent.password,
-                    isActive = intent.password.isNotBlank() || state.login.isNotBlank(),
+                    isActive = intent.password.isNotBlank() && state.login.isNotBlank(),
                     passwordError = null
                 )
             )
 
             LoginIntent.ForgotPassword -> forgotPassword()
             LoginIntent.Login -> login()
+            is LoginIntent.ChangeLoginFocused -> update(state.copy(loginFocus = intent.isFocused))
+            is LoginIntent.ChangePasswordFocused -> update(state.copy(passwordFocus = intent.isFocused))
         }
     }
 
     private fun login() {
-        navigate(AppScreens.AppMainTabScreen)
+        loginValidator(state.login)?.let {
+            update(state.copy(loginError = it))
+            return
+        }
+        passwordValidator(state.password)?.let {
+            update(state.copy(passwordError = it))
+            return
+        }
+        navigateWithoutBack(AppScreens.AppMainTabScreen, AppScreens.LoginScreen)
     }
 
     private fun forgotPassword() {
         isSHow = true
-        update(state.copy(loginError = "Login xato", passwordError = "Parol xato"))
+        update(state.copy(loginError = "Login xato"))
     }
 
 }

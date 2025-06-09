@@ -7,13 +7,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Int.wDp(screenWidth: Int): Dp {
-    return (this * screenWidth / 375).dp
+fun Int.wDp(screenWidth: Int, maxWidth: Int = 430): Dp {
+    return (this * screenWidth / maxWidth).dp
 }
 
 @Composable
-fun Int.hDp(screenHeight: Int): Dp {
-    return (this * screenHeight / 812).dp
+fun Int.hDp(screenHeight: Int, maxHeight: Int = 873): Dp {
+    return (this * screenHeight / maxHeight).dp
 }
 
 @Composable
