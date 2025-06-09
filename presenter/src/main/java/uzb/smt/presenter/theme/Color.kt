@@ -8,6 +8,7 @@ internal val BlackTextSecond = Color(0xFF2B343E)
 internal val WhiteScreen = Color(0xFFF9FFFF)
 internal val WhiteScreenSecond = Color(0xFFF2F8FF)
 internal val WhiteScreenThird = Color(0xFFF3F6FF)
+internal val WhiteScreenFourth = Color(0xFFF8F9FF)
 
 internal val Purple = Color(0xFF3A405A)
 internal val PurpleSecond = Color(0xFF263238)

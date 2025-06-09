@@ -6,7 +6,7 @@ data class ChatData(
     val image: String,
     val description: String,
     val lastMessageSeen: Boolean,
-    val lastMessageSeenDate: String
+    val lastMessageSeenDate: Long
 )
 
 fun getEmptyChatData(): ChatData = ChatData(
@@ -15,5 +15,5 @@ fun getEmptyChatData(): ChatData = ChatData(
     image = "image",
     description = "Assalomu aleykum ustoz yaxshimisiz?",
     lastMessageSeen = false,
-    lastMessageSeenDate = "2025-04-30 12:12"
+    lastMessageSeenDate = 12000000
 )

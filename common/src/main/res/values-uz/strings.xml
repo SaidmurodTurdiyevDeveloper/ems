@@ -83,4 +83,7 @@
     <string name="send_message">Xabar yuborish</string>
     <string name="jadids">Jadidlar</string>
     <string name="in_detail">Batafsil</string>
+    <string name="respect">Tashakkurnoma</string>
+    <string name="respect_lyceum">Hurmatli  akademik litseyimiz o’quvchisi sizda qoldirilgan darslar yo’qligi va darslarda muntazam qatnashib kelganingiz uchun Litsey rahbaryati tashakkur bildiradi \nHurmat bilan </string>
+    <string name="acedemic_lyceum_mamuryat">Akademic litsey raxbaryati</string>
 </resources>

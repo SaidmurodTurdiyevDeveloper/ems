@@ -75,6 +75,7 @@ internal fun ChatDetailsToolbar(
     }
 }
 
+
 @Preview
 @Composable
 private fun ChatDetailsToolbarPrev() {

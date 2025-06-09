@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -28,25 +28,26 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import uzb.smt.domen.model.ChatData
+import uzb.smt.domen.model.getEmptyChatData
 import uzb.smt.presenter.R
 import uzb.smt.presenter.theme.DarkBlue
 import uzb.smt.presenter.theme.DarkPurple
 import uzb.smt.presenter.theme.Gray
 import uzb.smt.presenter.theme.Montserrat
 import uzb.smt.presenter.theme.Purple
+import java.util.Calendar
 
 @Composable
 internal fun ChatItem(
     modifier: Modifier = Modifier,
-    image: String,
-    name: String,
-    description: String,
-    lastDate: String,
-    read: Boolean,
+    chatData: ChatData,
     isLast: Boolean,
     onAction: () -> Unit
 ) {
-    val time = lastDate.split(" ")[1]
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = chatData.lastMessageSeenDate
+    val time = calendar.get(Calendar.HOUR_OF_DAY).toString() + ":" + calendar.get(Calendar.MINUTE).toString()
     Card(
         modifier = modifier.fillMaxWidth(),
         onClick = onAction,
@@ -60,10 +61,12 @@ internal fun ChatItem(
                 .padding(start = 8.dp, end = 12.dp)
         ) {
             Row(
-                modifier = Modifier.padding(vertical = 14.dp), verticalAlignment = Alignment.Top
+                modifier = Modifier.padding(vertical = 14.dp),
+                verticalAlignment = Alignment.Top
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.img_avatar), contentDescription = "avatar", modifier = Modifier
+                    painter = painterResource(id = R.drawable.img_avatar),
+                    contentDescription = "avatar", modifier = Modifier
                         .size(46.dp)
                         .clip(CircleShape)
                 )
@@ -72,11 +75,11 @@ internal fun ChatItem(
                 )
                 Column(
                     modifier = Modifier
-                        .height(45.dp)
+                        .requiredHeightIn(min = 45.dp)
                         .weight(1f), verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = name,
+                        text = chatData.name,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyle(
@@ -88,7 +91,7 @@ internal fun ChatItem(
                         )
                     )
                     Text(
-                        text = description,
+                        text = chatData.description,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         style = TextStyle(
@@ -100,7 +103,7 @@ internal fun ChatItem(
                         )
                     )
                 }
-                if (read) {
+                if (chatData.lastMessageSeen) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_seen),
                         contentDescription = "arrow right",
@@ -136,9 +139,8 @@ internal fun ChatItem(
 @Composable
 private fun ChatItemPrev() {
     ChatItem(
-        image = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
-        name = "Sardor",
-        description = "O'quvchi",
-        lastDate = "12:00", read = true, isLast = true, onAction = {}
+        chatData = getEmptyChatData(),
+        isLast = true,
+        onAction = {}
     )
 }

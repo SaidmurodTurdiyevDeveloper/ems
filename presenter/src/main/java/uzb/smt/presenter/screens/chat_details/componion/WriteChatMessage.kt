@@ -6,11 +6,10 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -50,7 +49,7 @@ internal fun WriteChatMessage(
             .fillMaxWidth()
             .windowInsetsPadding(WindowInsets.navigationBars)
             .padding(horizontal = 8.dp, vertical = 16.dp)
-            .height(54.dp),
+            .requiredHeightIn(min = 54.dp, max = 64.dp),
         elevation = CardDefaults.cardElevation(4.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = RoundedCornerShape(26.dp)
@@ -59,7 +58,7 @@ internal fun WriteChatMessage(
 
         OutlinedTextField(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxWidth(),
             value = message,
             onValueChange = onChange,
             shape = androidx.compose.foundation.shape.RoundedCornerShape(26.dp),

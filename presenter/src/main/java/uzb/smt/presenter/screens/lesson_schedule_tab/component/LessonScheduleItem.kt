@@ -25,28 +25,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uzb.smt.domen.model.LessonScheduleData
+import uzb.smt.domen.model.getEmptyLessonScheduleData
 import uzb.smt.presenter.R
 import uzb.smt.presenter.theme.Montserrat
 import kotlin.random.Random
 
 @Composable
 internal fun LessonScheduleItem(
-    modifier: Modifier = Modifier, item: LessonScheduleData, onClick: (LessonScheduleData) -> Unit
+    modifier: Modifier = Modifier,
+    item: LessonScheduleData,
+    onClick: (LessonScheduleData) -> Unit
 ) {
     val color = remember {
         Color(
-            red = Random.Default.nextInt(256), green = Random.Default.nextInt(256), blue = Random.Default.nextInt(256)
+            red = Random.Default.nextInt(256),
+            green = Random.Default.nextInt(256),
+            blue = Random.Default.nextInt(256)
         )
     }
     Card(
         modifier = modifier
             .height(100.dp)
-            .fillMaxWidth(), colors = CardDefaults.cardColors(
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(
             containerColor = Color.White
-        ), elevation = CardDefaults.cardElevation(defaultElevation = 8.dp), shape = RoundedCornerShape(20.dp), onClick = {
+        ), elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        shape = RoundedCornerShape(20.dp),
+        onClick = {
             onClick(item)
         }) {
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -112,4 +121,13 @@ internal fun LessonScheduleItem(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun LessonScheduleItemPrev() {
+    LessonScheduleItem(
+        item = getEmptyLessonScheduleData(),
+        onClick = {}
+    )
 }

@@ -3,6 +3,7 @@ package uzb.smt.presenter.screens.chat_details
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,7 @@ import uzb.smt.presenter.screens.chat_details.componion.ChatDetailsToolbar
 import uzb.smt.presenter.screens.chat_details.componion.OtherMessage
 import uzb.smt.presenter.screens.chat_details.componion.WriteChatMessage
 import uzb.smt.presenter.screens.chat_details.componion.YourMessage
+import uzb.smt.presenter.theme.WhiteScreenFourth
 
 
 @Composable
@@ -44,6 +46,9 @@ internal fun ChatDetailsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(
+                color =WhiteScreenFourth
+            )
             .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         ChatDetailsToolbar(
