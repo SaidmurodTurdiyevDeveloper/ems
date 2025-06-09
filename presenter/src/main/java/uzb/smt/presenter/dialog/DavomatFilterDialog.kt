@@ -35,7 +35,7 @@ fun DavomatFilterDialog(
                 .windowInsetsPadding(WindowInsets.navigationBars)
                 .padding(top = 32.dp, bottom = 24.dp, start = 24.dp)
         ) {
-            Row (modifier = ){
+            Row (modifier = Modifier){
 
             }
         }
